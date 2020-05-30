@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class Cell : MonoBehaviour
 {
     const float m_separation = 0.25f;
     public static float Separation => m_separation;
+
+    MeshRenderer m_meshRenderer;
 
     [SerializeField]
     int m_posX;
@@ -14,6 +17,7 @@ public class Cell : MonoBehaviour
 
     private void Awake()
     {
+        m_meshRenderer = GetComponent<MeshRenderer>();
         GetCellPosition();
     }
 
@@ -46,8 +50,8 @@ public class Cell : MonoBehaviour
         return new Vector2(positionX, positionZ);
     }
 
-    public void ChangeColor()
+    public void ChangeColor(Color color)
     {
-        GameObject enemy = GameObject.Find("Enemy");
+        m_meshRenderer.materials[0].color = color;
     }
 }
