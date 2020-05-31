@@ -8,6 +8,9 @@ public class Cell : MonoBehaviour
     const float m_separation = 0.25f;
     public static float Separation => m_separation;
 
+    public bool Visited { get => visited; set => visited = value; }
+    public Cell PreviousCell { get => previousCell; set => previousCell = value; }
+
     MeshRenderer m_meshRenderer;
 
     [SerializeField]
@@ -15,8 +18,8 @@ public class Cell : MonoBehaviour
     [SerializeField]
     int m_posY;
 
-    public bool m_visited;
-    public Cell m_previousCell;
+    private bool visited;
+    private Cell previousCell;
 
     private void Awake()
     {

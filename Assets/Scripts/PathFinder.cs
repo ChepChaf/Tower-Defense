@@ -61,32 +61,29 @@ public class PathFinder : MonoBehaviour
             // PrintQueue(toVisit);
             Cell current = toVisit.Dequeue();
 
-            if (current.m_visited)
-                continue;
-
             current.ChangeColor(Color.green);
             yield return new WaitForSeconds(0.1f);
 
             if (current == m_endOfPath)
             {
-                while (current.m_previousCell != null)
+                while (current.PreviousCell != null)
                 {
                     m_path.Push(current);
-                    current = current.m_previousCell;
+                    current = current.PreviousCell;
                 }
 
                 break;
             }
 
-            current.m_visited = true;
+            current.Visited = true;
 
             List<Cell> cellNeighbors = CalculateNeighborhoods(current);
 
             foreach (Cell neighbor in cellNeighbors)
             {
-                if (!neighbor.m_visited)
+                if (!neighbor.Visited && !toVisit.Contains(neighbor))
                 {
-                    neighbor.m_previousCell = current;
+                    neighbor.PreviousCell = current;
 
                     neighbor.ChangeColor(Color.blue);
                     yield return new WaitForSeconds(0.1f);
