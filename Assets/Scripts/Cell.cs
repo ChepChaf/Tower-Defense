@@ -15,6 +15,9 @@ public class Cell : MonoBehaviour
     [SerializeField]
     int m_posY;
 
+    public bool m_visited;
+    public Cell m_previousCell;
+
     private void Awake()
     {
         m_meshRenderer = GetComponent<MeshRenderer>();
